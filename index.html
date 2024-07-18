@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>LLM dad jokes</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/dracula.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>LLM dad jokes</h1>
+					<img src="img/logo.png" height="300px">
+					<p><small>Roman Grebennikov | AI Tinkerers Berlin | 2024</small></p>
+				</section>
+				<section>
+					<h1>LLM that makes punchline<br> on any prompt</h1>
+				</section>
+
+				<section>
+					<h2>How it started</h2>
+					<ul>
+						<li>Building a novel search engine: <strong>Nixiesearch</strong></li>
+						<li>Fine-tunes to your docs: <strong>synthetic training data needed</strong></li>
+					</ul>
+					<img src="img/qgen.png" height="400px">
+				</section>
+				<section>
+					<h2>NSFW LLM?</h2>
+					<img src="img/nsfw.png" height="400px">
+					<ul>
+						<li>Custom training data = very special LLM</li>
+					</ul>
+				</section>
+				<section>
+					<h2>The idea</h2>
+					<p>Existing LLMs <strong>are too polite</strong> with jokes</p>
+					<img src="img/chatgpt.png" height="350px">
+					<p>Let's fine-tune a LLM on a large joke dataset!</p>
+				</section>
+				<section>
+					<h2>Training data</h2>
+					<p>/r/DadJokes from 2011 till 2022</p>
+					<img src="img/reddit.png" height="500px">
+				</section>
+				<section>
+					<h2>Training process</h2>
+					<p>2x 4090 in a hand made eco wood rig:</p>
+					<img src="img/rig.jpg" height="350px">
+					<p>Axolotl config and model: <a href="https://huggingface.co/shuttie/mistral-7b-dadjokes-v2">shuttie/mistral-7b-dadjokes-v2</a></p>
+				</section>
+				<section>
+					<h2>GPU poor fine-tuning</h2>
+					<ul>
+						<li><strong>QLoRa with 7B-9B</strong> on RTX 4090 = OK</li>
+						<li><strong>FSDP+QLoRa</strong> on 2x RTX 4090 = 2x faster</li>
+						<li><strong>Full fine-tuning</strong>: only on 3x 4090 😢</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Results</h2>
+					<img src="img/ex1.png" height="350px">
+				</section>
+				<section>
+					<img src="img/dino.png" height="650px">
+				</section>
+				<section>
+					<h2>Results</h2>
+					<img src="img/ex2.png" height="350px">
+				</section>
+				<section>
+					<h2>Links</h2>
+					<img src="img/linkedin.png" height="200px">
+					<ul>
+						<li>Linkedin: <a href="https://www.linkedin.com/in/romangrebennikov/">https://linkedin.com/in/romangrebennikov/</a></li>
+						<li>Model weights: <a href="https://huggingface.co/shuttie/mistral-7b-dadjokes-v2">shuttie/mistral-7b-dadjokes-v2</a></li>
+						<li>Training data: <a href="https://huggingface.co/datasets/shuttie/reddit-dadjokes">shuttie/reddit-dadjokes</a></li>
+						<li>Demo: <a href="https://huggingface.co/spaces/shuttie/dadjokes">huggingface.co/spaces/shuttie/dadjokes</a></li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+                history: true,
+                controls: true,
+                progress: true,
+                width: 1200,
+                transition: 'none',
+                slideNumber: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
